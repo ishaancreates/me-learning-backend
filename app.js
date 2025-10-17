@@ -50,10 +50,28 @@ app.get('/get-user', (req,res) => {
         res.send(user)
     })
 
+
     // find() agar koi user ni milta to empty array return krega
     // userModel.find().then((users) => {
     //     res.send(users)
     // })
+})
+
+app.get('/update-user', async (req,res) => {
+    await userModel.findOneAndUpdate({
+        username: 's'
+    }, 
+    {
+        email:'s@gmail.com'
+    })
+    res.send('email updated')
+})
+
+app.get('/delete-user', async (req,res) => {
+    await userModel.findOneAndDelete({
+        username: 's'
+    })
+    res.send('user deleted')
 })
 
 app.post('/get-form-data',(req,res) => {
