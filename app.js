@@ -5,27 +5,26 @@ const app = express()
 
 app.use(morgan('dev'))
 
+//built in middleware
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
 app.set ("view engine", 'ejs')
 
-app.use((req, res,next) => {
-    console.log("This is middleware")
 
-    const a =2
-    const b =3 
-    console.log(a + b)
-    res.send("Response from middleware")
-    return next()
+
+app.get('/',(req,res)=>{
+    res.render('index', {title: "Home Page"})
 })
 
-app.get('/',(req, res, next) => {
-    const a =5;
-    const b =6
-    console.log(a+b)
-    return next()
-},(req, res) => {
-    res.render('index')
+app.get('/about',(req,res)=>{
+    res.render("This is about page")
 })
 
+app.post('/get-form-data',(req,res) => {
+    console.log(req.body)
+    res.send('data received')
+})
 
 app.listen(3000,(e)=>{
     console.log("Server is running")
