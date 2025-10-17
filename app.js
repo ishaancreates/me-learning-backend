@@ -40,6 +40,22 @@ app.post('/register',async (req,res) => {
     res.send(newUser)
 })
 
+app.get('/get-user', (req,res) => {
+
+    // findOne() agar koi user ni milta to null return karega 
+
+    userModel.findOne({
+        username:'ishaancreates'
+    }).then((user) => {
+        res.send(user)
+    })
+
+    // find() agar koi user ni milta to empty array return krega
+    // userModel.find().then((users) => {
+    //     res.send(users)
+    // })
+})
+
 app.post('/get-form-data',(req,res) => {
     console.log(req.body)
     res.send('data received')
